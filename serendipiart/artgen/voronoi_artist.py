@@ -23,6 +23,8 @@ class VoronoiArtist:
     def __init__(self, config: VoronoiArtistConfig, plotter: Plotter) -> None:
         self.__config = config
         self.__plotter = plotter
+        # seed random number generator and use it to generate determinsitic art
+        np.random.seed(config.seed)
 
     def __generate_points(self) -> npt.NDArray:
         x_bounds, y_bounds = self.__bounds()
@@ -53,13 +55,12 @@ class VoronoiArtist:
     def __create_voronoi_shapes(self, regions: npt.NDArray) -> list[Shape]:
         # close the region by appending first point in region to the end of its points e.g [[(1,2), (2,4)]] -> [[(1,2), (2,4), (1,2)]]
         closed_regions = [np.append(region, region[0:1], axis=0) for region in regions]
-        # seed random number generator and use it to generate colours
-        rng = np.random.default_rng(seed=self.__config.seed)
+
         shapes = [
             Shape(
                 xcoords=closed_region[:, 0],
                 ycoords=closed_region[:, 1],
-                colour=(rng.random(), rng.random(), rng.random()),
+                colour=(np.random.random(), np.random.random(), np.random.random()),
             )
             for closed_region in closed_regions
         ]
