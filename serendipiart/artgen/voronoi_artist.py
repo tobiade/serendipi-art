@@ -5,6 +5,7 @@ from scipy.spatial import Voronoi
 from serendipiart.plot.plotter import Plotter
 from serendipiart.plot.shape import Shape
 from PIL import Image
+import io
 
 
 @dataclass
@@ -64,7 +65,7 @@ class VoronoiArtist:
         ]
         return shapes
 
-    def draw(self):
+    def draw(self) -> io.BytesIO:
         points = self.__generate_points()
         regions = self.__construct_voronoi(points)
         shapes = self.__create_voronoi_shapes(regions)
@@ -73,8 +74,4 @@ class VoronoiArtist:
         xlim = x_bounds + np.array([self.X_BUFFER, -self.X_BUFFER])
         ylim = y_bounds + np.array([self.Y_BUFFER, -self.Y_BUFFER])
 
-        with self.__plotter.plot(
-            (xlim[0], xlim[1]), (ylim[0], ylim[1]), shapes
-        ) as img_bytes:
-            im = Image.open(img_bytes)
-            im.show()
+        return self.__plotter.plot((xlim[0], xlim[1]), (ylim[0], ylim[1]), shapes)

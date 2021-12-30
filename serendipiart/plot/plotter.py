@@ -1,6 +1,7 @@
 from typing import Tuple
+
+from matplotlib.figure import Figure
 from serendipiart.plot.shape import Shape
-import matplotlib.pyplot as plt
 import io
 
 
@@ -14,18 +15,18 @@ class Plotter:
     def plot(
         self, xlim: Tuple[int, int], ylim: Tuple[int, int], shapes: list[Shape]
     ) -> io.BytesIO:
-        _, ax = plt.subplots(figsize=(self.__width, self.__height), dpi=self.__dpi)
-        plt.grid(False)
-        plt.axis("off")
+        figure = Figure(figsize=(self.__width, self.__height), dpi=self.__dpi)  # type: ignore
+        ax = figure.subplots()
         ax.set_aspect("equal")
         ax.set_xlim(*xlim)
         ax.set_ylim(*ylim)
+        ax.set_axis_off()
 
         [
             ax.fill(shape.xcoords, shape.ycoords, facecolor=shape.colour, alpha=0.9)
             for shape in shapes
         ]
         buf = io.BytesIO()
-        plt.savefig(buf, format="png")
+        figure.savefig(buf, format="png")
         buf.seek(0)
         return buf
