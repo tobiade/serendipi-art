@@ -13,7 +13,11 @@ class Plotter:
         pass
 
     def plot(
-        self, xlim: Tuple[int, int], ylim: Tuple[int, int], shapes: list[Shape]
+        self,
+        xlim: Tuple[int, int],
+        ylim: Tuple[int, int],
+        title: str,
+        shapes: list[Shape],
     ) -> io.BytesIO:
         figure = Figure(figsize=(self.__width, self.__height), dpi=self.__dpi)  # type: ignore
         ax = figure.subplots()
@@ -27,6 +31,12 @@ class Plotter:
             for shape in shapes
         ]
         buf = io.BytesIO()
-        figure.savefig(buf, format="png")
+        figure.suptitle(
+            title,
+            fontsize=20,
+            family="Futura",
+        )
+        figure.tight_layout()
+        figure.savefig(buf, format="png", bbox_inches="tight", pad_inches=0.3)
         buf.seek(0)
         return buf

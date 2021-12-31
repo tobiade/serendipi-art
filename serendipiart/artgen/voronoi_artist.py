@@ -2,21 +2,24 @@ import numpy as np
 import numpy.typing as npt
 from dataclasses import dataclass
 from scipy.spatial import Voronoi
+from serendipiart.artgen.artist import Artist, ArtistFactory
 from serendipiart.plot.plotter import Plotter
 from serendipiart.plot.shape import Shape
-from PIL import Image
 import io
+from serendipiart.artgen.artist import ArtistFactory, Artist
+from serendipiart.artgen.caption import get_caption
 
 
 @dataclass
 class VoronoiArtistConfig:
     seed: int
+    art_name: str
     num_points: int = 200
     x_lim: int = 13
     y_lim: int = 16
 
 
-class VoronoiArtist:
+class VoronoiArtist(Artist):
     X_BUFFER = 2.5
     Y_BUFFER = 2.5
 
@@ -24,14 +27,14 @@ class VoronoiArtist:
         self.__config = config
         self.__plotter = plotter
         # seed random number generator and use it to generate determinsitic art
-        np.random.seed(config.seed)
+        self.__rng = np.random.default_rng(config.seed)
 
     def __generate_points(self) -> npt.NDArray:
         x_bounds, y_bounds = self.__bounds()
 
         num_points = self.__config.num_points
-        x = np.random.uniform(*x_bounds, size=num_points).reshape((num_points, 1))
-        y = np.random.uniform(*y_bounds, size=num_points).reshape((num_points, 1))
+        x = self.__rng.uniform(*x_bounds, size=num_points).reshape((num_points, 1))
+        y = self.__rng.uniform(*y_bounds, size=num_points).reshape((num_points, 1))
         pts = np.hstack([x, y])
         return pts
 
@@ -60,7 +63,7 @@ class VoronoiArtist:
             Shape(
                 xcoords=closed_region[:, 0],
                 ycoords=closed_region[:, 1],
-                colour=(np.random.random(), np.random.random(), np.random.random()),
+                colour=(self.__rng.random(), self.__rng.random(), self.__rng.random()),
             )
             for closed_region in closed_regions
         ]
@@ -75,4 +78,14 @@ class VoronoiArtist:
         xlim = x_bounds + np.array([self.X_BUFFER, -self.X_BUFFER])
         ylim = y_bounds + np.array([self.Y_BUFFER, -self.Y_BUFFER])
 
-        return self.__plotter.plot((xlim[0], xlim[1]), (ylim[0], ylim[1]), shapes)
+        return self.__plotter.plot(
+            (xlim[0], xlim[1]), (ylim[0], ylim[1]), self.__config.art_name, shapes
+        )
+
+
+class VoronoiArtistFactory(ArtistFactory):
+    def make(self, seed: int, img_width: int, img_height: int) -> Artist:
+        config = VoronoiArtistConfig(seed=int(seed), art_name=get_caption())
+        plotter = Plotter(img_width, img_height)
+        artist = VoronoiArtist(config, plotter)
+        return artist
