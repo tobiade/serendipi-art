@@ -20,3 +20,46 @@ We give OpenAI some examples of image names and it's able to complete our list w
 | Seed = 220492 | Seed = 100 | Seed = 200495 |
 |     :---:         |     :---:      |     :---:     |
 | <img src="./docs/images/symphony-220492.png"  alt="1" width = 360px height = 450px> | <img src="./docs/images/rebel-100.png"  alt="2" width = 360px height = 450px >    | <img src="./docs/images/starry-night-200495.png"  alt="3" width = 360px height = 450px > |
+
+# Usage
+## Clone the project
+```bash
+$ git clone https://github.com/tobiade/serendipi-art.git
+```
+
+## Install dependencies
+```bash
+$ cd serendipi-art # go into the serendipi-art folder
+$ pip install -r requirements.txt # install dependencies
+```
+
+## Set environment variables
+Firstly, you'll need to get an API key from [OpenAI](https://openai.com/api/) to utilise the OpenAI model. You can do this by crating an account and grabbing your API key from [here.](https://beta.openai.com/account/api-keys)
+<br>
+
+You can then set environment variables by creating a `.env` file (a file named `.env`) in the serendipi-art directory like so
+```bash
+# Flask
+FLASK_APP=serendipiart
+FLASK_ENV=development
+
+# OpenAI
+OPENAI_API_KEY={Insert your API key}
+```
+or you could set them in your shell like so:
+```bash
+$ export FLASK_APP=serendipiart
+$ export FLASK_ENV=development
+$ export OPENAI_API_KEY={Insert your API key}
+```
+
+## Run the application
+```bash
+$ flask run
+```
+
+## View your masterpiece
+Visit http://127.0.0.1:5000/art/{seed value} e.g http://127.0.0.1:5000/art/111023. A different number will generate a different Voronoi image.
+
+## Credits
+- [Generative Art with Python](https://www.generativehut.com/post/robots-and-generative-art-and-python-oh-my)
