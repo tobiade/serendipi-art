@@ -34,10 +34,10 @@ $ pip install -r requirements.txt # install dependencies
 ```
 
 ## Set environment variables
-Firstly, you'll need to get an API key from [OpenAI](https://openai.com/api/) to utilise the OpenAI model. You can do this by crating an account and grabbing your API key from [here.](https://beta.openai.com/account/api-keys)
+Firstly, you'll need to get an API key from [OpenAI](https://openai.com/api/) to utilise the OpenAI model. You can do this by creating an account and grabbing your API key from [here.](https://beta.openai.com/account/api-keys)
 <br>
 
-You can then set environment variables by creating a `.env` file (a file named `.env`) in the serendipi-art directory like so
+You can then set environment variables by creating a `.env` file (a file named `.env`) in the serendipi-art directory like so:
 ```bash
 # Flask
 FLASK_APP=serendipiart
