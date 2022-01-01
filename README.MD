@@ -17,14 +17,6 @@ We give OpenAI some examples of image names and it's able to complete our list w
 >8. **Ominous Fog**
 
 # Examples
-<table style="padding:10px">
-  <tr>
-    <td style="text-align:center">Seed = 100 <br>
-    <img src="./docs/images/rebel-100.png"  alt="1" width = 360px height = 503px >
-    </td>
-      
- <td style="text-align:center"> Seed = 220492 <br> <img src="./docs/images/symphony-220492.png"  alt="2" width = 360px height = 503px> </td>
-   <td style="text-align:center"> Seed = 200495 <br>
-         <img src="./docs/images/starry-night-200495.png"  alt="3" width = 360px height = 503px ></td>
-  </tr>
-</table>
+| Seed = 220492 | Seed = 100 | Seed = 200495 |
+|     :---:         |     :---:      |     :---:     |
+| <img src="./docs/images/symphony-220492.png"  alt="1" width = 360px height = 503px> | <img src="./docs/images/rebel-100.png"  alt="2" width = 360px height = 503px >    | <img src="./docs/images/starry-night-200495.png"  alt="3" width = 360px height = 503px > |
