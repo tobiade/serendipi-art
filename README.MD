@@ -19,7 +19,7 @@ We give OpenAI some examples of image names and it's able to complete our list w
 # Examples
 | Seed = 220492 | Seed = 100 | Seed = 200495 |
 |     :---:         |     :---:      |     :---:     |
-| <img src="./docs/images/symphony-220492.png"  alt="1" width = 360px height = 450px> | <img src="./docs/images/rebel-100.png"  alt="2" width = 360px height = 450px >    | <img src="./docs/images/starry-night-200495.png"  alt="3" width = 360px height = 450px > |
+| <img src="./docs/images/symphony-220492.png"  alt="1" width = 360px height = 450px> | ![2](./docs/images/rebel-100-resized.png)   | <img src="./docs/images/starry-night-200495.png"  alt="3" width = 360px height = 450px > |
 
 # Usage
 ## Clone the project
