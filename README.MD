@@ -17,9 +17,9 @@ We give OpenAI some examples of image names and it's able to complete our list w
 >8. **Ominous Fog**
 
 # Examples
-| Seed = 220492 | Seed = 100 | Seed = 200495 |
-|     :---:         |     :---:      |     :---:     |
-| ![1](./docs/images/symphony-220492-resized.png)| ![2](./docs/images/rebel-100-resized.png)   | ![3](./docs/images/starry-night-200495-resized.png)|
+| Seed = 220492 | Seed = 200495 |
+|     :---:     |     :---:     |
+| ![1](./docs/images/symphony-220492-resized.png)| ![2](./docs/images/rebel-100-resized.png)|
 
 # Usage
 ## Clone the project
